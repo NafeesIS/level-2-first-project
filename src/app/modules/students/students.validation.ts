@@ -35,6 +35,7 @@ const localGurdianValidationSchema = z.object({
 
 const studentValidationSchema = z.object({
   id: z.string().min(1),
+  password: z.string().max(20),
   name: userNameValidationSchema,
   gender: z
     .enum(['male', 'female', 'other'])
@@ -46,12 +47,13 @@ const studentValidationSchema = z.object({
   contactNumber: z.string().min(1),
   emergencyContactNo: z.string().min(1),
   bloodGroup: z.enum(['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']),
-  presentAddress: z.literal('string'),
-  parmanentAddress: z.literal('string'),
+  presentAddress: z.string(),
+  permanentAddress: z.string(),
   gurdian: gurdianValidationSchema,
   localGurdian: localGurdianValidationSchema,
   profileImg: z.string().optional(),
   isActive: z.enum(['active', 'blocked']).default('active'),
+  isDeleted: z.boolean(),
 });
 
 export default studentValidationSchema;
